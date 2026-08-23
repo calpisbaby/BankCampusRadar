@@ -3,7 +3,10 @@ __pycache__/
 *.pyc
 collector/cache/
 full_dom/
+uat_dom*/
+edge_uat/
 edge_tmp*/
+edge_vl/
 cdp_profile*/
 
 # ---- 本地工具输出 ----

@@ -4,9 +4,9 @@
 window.FMETA = {
   app_name: "咨询公司招聘雷达",
   version: "1.0.0",
-  updated_at: "2026-08-22",
+  updated_at: "2026-08-23",
   data_start: "2026-03-01",
-  firm_count: 18,
+  firm_count: 17,
   source_count: 18,
   rank_note: "排序：四大会计师事务所 → MBB顶级战略咨询 → 其他知名咨询/金融科技（自定义）",
 };
