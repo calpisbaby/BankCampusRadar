@@ -1,0 +1,15 @@
+# ---- 运行时/临时文件（不入库） ----
+__pycache__/
+*.pyc
+collector/cache/
+full_dom/
+edge_tmp*/
+cdp_profile*/
+
+# ---- 本地工具输出 ----
+test_export.xlsx
+*.log
+
+# ---- 系统 ----
+Thumbs.db
+.DS_Store

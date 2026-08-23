@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>银招雷达 · 银行秋招春招全量监测工作台</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ==================== 顶栏 ==================== -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand" onclick="location.hash='#/'">
+      <div class="brand-logo" aria-hidden="true">
+        <svg viewBox="0 0 44 44" width="40" height="40">
+          <circle cx="22" cy="22" r="17" fill="none" stroke="rgba(201,162,39,.55)" stroke-width="1.6"/>
+          <circle cx="22" cy="22" r="11" fill="none" stroke="rgba(201,162,39,.4)" stroke-width="1.4"/>
+          <circle cx="22" cy="22" r="5" fill="none" stroke="rgba(201,162,39,.3)" stroke-width="1.2"/>
+          <circle cx="22" cy="22" r="1.8" fill="#C9A227"/>
+          <line x1="22" y1="22" x2="38" y2="10" stroke="#E8C766" stroke-width="1.8" stroke-linecap="round" class="radar-sweep"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <div class="brand-name"><span id="brandName">银招雷达</span><span class="brand-en" id="brandEn">BankCampus Radar</span></div>
+        <div class="brand-tagline" id="brandTagline">银行秋招 · 春招 全量监测工作台</div>
+      </div>
+    </div>
+    <nav class="topnav">
+      <a href="#/radar/bank" class="nav-link" data-route="home" id="navHome">工作台</a>
+      <a href="#/positions" class="nav-link" data-route="positions">岗位库</a>
+      <a href="#/banks" class="nav-link" data-route="banks" id="navBankLink">银行库</a>
+      <a href="#/fav" class="nav-link" data-route="fav">收藏夹 <span class="fav-count" id="navFavCount">0</span></a>
+    </nav>
+    <div class="topbar-right">
+      <a class="btn-switch" href="#/" title="返回向导页选择雷达">⇄ 切换雷达</a>
+      <span class="live-badge"><span class="live-dot"></span>每日巡检</span>
+      <div class="update-info">
+        <span class="update-label">数据更新</span>
+        <span class="update-value" id="updateDate">—</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== 主容器 ==================== -->
+<main id="app">
+
+  <!-- ===== 向导视图（起始页） ===== -->
+  <section id="view-landing" class="view landing" hidden>
+    <div class="landing-wrap">
+      <div class="landing-hero">
+        <div class="landing-logo" aria-hidden="true">
+          <svg viewBox="0 0 64 64" width="72" height="72">
+            <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(201,162,39,.5)" stroke-width="2"/>
+            <circle cx="32" cy="32" r="17" fill="none" stroke="rgba(201,162,39,.38)" stroke-width="1.8"/>
+            <circle cx="32" cy="32" r="8" fill="none" stroke="rgba(201,162,39,.3)" stroke-width="1.6"/>
+            <circle cx="32" cy="32" r="2.4" fill="#C9A227"/>
+            <line x1="32" y1="32" x2="55" y2="14" stroke="#E8C766" stroke-width="2.2" stroke-linecap="round" class="radar-sweep"/>
+          </svg>
+        </div>
+        <h1>校招监测 · 双雷达工作台</h1>
+        <p class="landing-sub">选择一个监测对象，进入对应的招聘雷达。数据每日自动巡检更新。</p>
+      </div>
+      <div class="landing-cards">
+        <a class="landing-card" href="#/radar/bank">
+          <div class="lc-icon">🏦</div>
+          <h2>银行招聘雷达</h2>
+          <p>国有银行 · 股份制 · 城商行 · 农商行 · 外资行<br>秋招 / 春招全量岗位监测（2024-09 起）</p>
+          <span class="lc-go">进入工作台 →</span>
+        </a>
+        <a class="landing-card alt" href="#/radar/consulting">
+          <div class="lc-icon">💼</div>
+          <h2>咨询公司招聘雷达</h2>
+          <p>四大 · MBB · 知名咨询与金融科技<br>2026 / 2027 届招聘监测（中国大陆）</p>
+          <span class="lc-go">进入工作台 →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 工作台视图 ===== -->
+  <section id="view-home" class="view">
+    <!-- KPI 监控卡片 -->
+    <div class="kpi-row">
+      <div class="kpi-card kpi-clickable" data-go="#/positions?status=open" title="点击查看开放中岗位列表">
+        <div class="kpi-label">开放岗位总数 <span class="kpi-unit">截止今日 · 点击查看</span></div>
+        <div class="kpi-value" id="kpiOpen">0</div>
+        <div class="kpi-sub"><span id="kpiHqWord">其中总行岗位</span> <b id="kpiHq">0</b></div>
+      </div>
+      <div class="kpi-card kpi-clickable" data-go="#/banks" title="点击查看全部机构">
+        <div class="kpi-label"><span id="kpiBankWord">招聘银行家数</span> <span class="kpi-unit">有岗位开放 · 点击查看</span></div>
+        <div class="kpi-value" id="kpiBank">0</div>
+        <div class="kpi-sub">覆盖 <b id="kpiBankType">0</b> 类机构</div>
+      </div>
+      <div class="kpi-card kpi-clickable" data-go="#/positions?fav=1" title="点击查看已收藏岗位">
+        <div class="kpi-label">已收藏岗位数 <span class="kpi-unit">本地星标 · 点击查看</span></div>
+        <div class="kpi-value gold" id="kpiFav">0</div>
+        <div class="kpi-sub">共收藏 <b id="kpiFavBank">0</b> <span id="kpiFavBankWord">家银行</span></div>
+      </div>
+      <div class="kpi-card kpi-clickable" data-go="#/positions?new=1" title="点击查看今日新增岗位">
+        <div class="kpi-label">每日新增 <span class="kpi-unit">今日新监测到 · 点击查看</span></div>
+        <div class="kpi-value" id="kpiNew">0</div>
+        <div class="kpi-sub kpi-new">按数据更新日统计</div>
+      </div>
+    </div>
+
+    <!-- 筛选区 -->
+    <div class="filter-bar" id="filterBar">
+      <div class="filter-row">
+        <div class="filter-item">
+          <label class="filter-label">地区</label>
+          <div class="cascade">
+            <select id="fProvince" class="f-select"></select>
+            <select id="fCity" class="f-select drill" hidden></select>
+          </div>
+        </div>
+        <div class="filter-item">
+          <label class="filter-label" id="filterTypeWord">银行类型</label>
+          <select id="fType" class="f-select"></select>
+        </div>
+        <div class="filter-item">
+          <label class="filter-label">机构层级</label>
+          <select id="fLevel" class="f-select"></select>
+        </div>
+        <div class="filter-item">
+          <label class="filter-label">时间</label>
+          <select id="fYear" class="f-select"></select>
+        </div>
+        <div class="filter-item">
+          <label class="filter-label">招聘批次</label>
+          <select id="fBatch" class="f-select"></select>
+        </div>
+        <div class="filter-item filter-search">
+          <label class="filter-label" id="filterSearchWord">银行名称</label>
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="fSearch" type="text" placeholder="模糊搜索，如：工商 / 招商 / 汇丰" autocomplete="off">
+            <button id="btnClearSearch" class="search-clear" title="清空搜索">×</button>
+          </div>
+        </div>
+        <button id="btnReset" class="btn-reset" title="重置全部筛选">重置</button>
+      </div>
+      <div class="filter-row sub">
+        <div class="status-seg" role="tablist" aria-label="岗位状态">
+          <button class="seg-btn active" data-status="all">全部</button>
+          <button class="seg-btn" data-status="open">开放中</button>
+          <button class="seg-btn" data-status="closed">已截止</button>
+        </div>
+        <div class="special-chip" id="specialChip" hidden>
+          <span id="specialChipText"></span>
+          <button id="specialChipClear" title="清除筛选">×</button>
+        </div>
+        <div class="result-info">共 <b id="resultCount">0</b> 条岗位信息 · <span id="resultNote">按中国银行业协会 2025 百强排名排序</span></div>
+        <button id="btnExport" class="btn-export" title="导出当前筛选结果为 Excel（.xlsx）">📊 导出 Excel</button>
+      </div>
+    </div>
+
+    <!-- 岗位列表 -->
+    <div class="list-wrap" id="positionList"></div>
+  </section>
+
+  <!-- ===== 详情视图 ===== -->
+  <section id="view-detail" class="view" hidden></section>
+
+  <!-- ===== 收藏夹视图 ===== -->
+  <section id="view-fav" class="view" hidden>
+    <div class="fav-head">
+      <h2>收藏夹</h2>
+      <div class="fav-meta">已收藏 <b id="favTotal">0</b> 个岗位 · 覆盖 <b id="favBanks">0</b> <span id="favBanksWord">家银行</span></div>
+      <button id="btnClearFav" class="btn-reset">清空收藏</button>
+    </div>
+    <div class="list-wrap" id="favList"></div>
+  </section>
+
+  <!-- ===== 机构库视图 ===== -->
+  <section id="view-banks" class="view" hidden>
+    <div class="fav-head">
+      <h2 id="banksTitle">银行库</h2>
+      <div class="fav-meta">共 <b id="banksTotal">0</b> <span id="banksTotalWord">家银行</span> · 按中银协 2025 百强排名排序 · <b>点击卡片查看详情</b></div>
+    </div>
+    <div class="banks-grid" id="banksList"></div>
+  </section>
+</main>
+
+<!-- 银行详情侧边栏 -->
+<div class="sidebar-mask" id="sidebarMask" hidden></div>
+<aside class="sidebar" id="bankSidebar" hidden></aside>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span id="footUpdate">—</span>
+    <span id="footRankNote">—</span>
+  </div>
+</footer>
+
+<script src="data/meta.js"></script>
+<script src="data/banks.js"></script>
+<script src="data/positions.js"></script>
+<script src="data/firm_meta.js"></script>
+<script src="data/firms.js"></script>
+<script src="data/firm_positions.js"></script>
+<script src="js/xlsx.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
