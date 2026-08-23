@@ -352,7 +352,7 @@
       "</div>" +
       '<div class="info-cell">' +
         '<span class="edu-chip">' + I.edu + esc(p.edu) + "</span>" +
-        '<span class="loc-line">' + I.pin + "<b>" + esc(p.locs.join(" / ")) + "</b></span>" +
+        '<span class="loc-line" title="' + esc(p.locs.join(" / ")) + '">' + I.pin + "<b>" + esc(p.locs.join(" / ")) + "</b></span>" +
       "</div>" +
       '<div class="dead-cell">' +
         '<div class="dead-date">' + esc(p.dead) + "</div>" +
@@ -459,13 +459,13 @@
       "</div>" +
     "</div>";
     html += '<div class="info-grid">' +
-      '<div class="info-item"><div class="info-icon">' + I.pin + "</div><div><div class=\"i-label\">工作地点</div><div class=\"i-value\">" + esc(p.locs.join(" / ")) + "</div></div></div>" +
-      '<div class="info-item"><div class="info-icon">' + I.bank + "</div><div><div class=\"i-label\">岗位名称</div><div class=\"i-value\">" + esc(p.type) + "</div></div></div>" +
-      '<div class="info-item"><div class="info-icon">' + I.cal + "</div><div><div class=\"i-label\">招聘时间</div><div class=\"i-value\">" + p.target + "届 · " + p.year + " 年公告</div></div></div>" +
-      '<div class="info-item"><div class="info-icon">' + I.batch + "</div><div><div class=\"i-label\">招聘批次</div><div class=\"i-value\">" + esc(p.batch) + "</div></div></div>" +
-      '<div class="info-item"><div class="info-icon">' + I.clock + "</div><div><div class=\"i-label\">开放时间</div><div class=\"i-value\">" + esc(p.open) + "</div></div></div>" +
-      '<div class="info-item"><div class="info-icon">' + I.clock + "</div><div><div class=\"i-label\">投递截止</div>" + deadHtml + "</div></div>" +
-      '<div class="info-item"><div class="info-icon" style="background:var(--gold-soft);color:var(--gold-deep)">' + I.edu + "</div><div><div class=\"i-label\">最低学历</div><div class=\"i-value\">" + esc(p.edu) + "</div></div></div>" +
+      '<div class="info-item"><div class="info-icon">' + I.bank + '</div><div class="i-body"><div class="i-label">岗位名称</div><div class="i-value">' + esc(p.type) + "</div></div></div>" +
+      '<div class="info-item"><div class="info-icon">' + I.batch + '</div><div class="i-body"><div class="i-label">招聘批次</div><div class="i-value">' + esc(p.batch) + "</div></div></div>" +
+      '<div class="info-item"><div class="info-icon">' + I.cal + '</div><div class="i-body"><div class="i-label">招聘时间</div><div class="i-value">' + p.target + "届 · " + p.year + " 年公告</div></div></div>" +
+      '<div class="info-item"><div class="info-icon">' + I.pin + '</div><div class="i-body"><div class="i-label">工作地点</div><div class="i-value"><span class="loc-chips">' + p.locs.map(function (l) { return '<span class="loc-chip">' + esc(l) + "</span>"; }).join("") + "</span></div></div></div>" +
+      '<div class="info-item"><div class="info-icon">' + I.clock + '</div><div class="i-body"><div class="i-label">开放时间</div><div class="i-value">' + esc(p.open) + "</div></div></div>" +
+      '<div class="info-item"><div class="info-icon">' + I.clock + '</div><div class="i-body"><div class="i-label">投递截止</div>' + deadHtml + "</div></div>" +
+      '<div class="info-item"><div class="info-icon" style="background:var(--gold-soft);color:var(--gold-deep)">' + I.edu + '</div><div class="i-body"><div class="i-label">最低学历</div><div class="i-value">' + esc(p.edu) + "</div></div></div>" +
     "</div>";
     html += '<div class="detail-section"><div class="section-title"><span class="bar"></span>工作职责</div><ul class="duty-list">' +
       duties.map(function (s) { return "<li>" + esc(s) + "。</li>"; }).join("") + "</ul></div>";
