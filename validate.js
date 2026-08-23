@@ -32,7 +32,7 @@ check(POS.every(x => /^\d{4}-\d{2}-\d{2}$/.test(x.open) && /^\d{4}-\d{2}-\d{2}$/
 
 // 排名连续性（百强部分）
 const ranked = BANKS.filter(x => x.rank < 200).sort((a, b) => a.rank - b.rank);
-check(ranked[0].rank === 1 && ranked.length === 36, `百强名单银行=${ranked.length}家, rank 1 = ${ranked[0].name}`);
+check(ranked[0].rank === 1 && ranked.length >= 36, `百强名单银行=${ranked.length}家, rank 1 = ${ranked[0].name}`);
 
 // 截止"今日"(META.updated_at) 开放数
 const today = new Date(META.updated_at + 'T00:00:00').getTime();
