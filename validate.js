@@ -1,7 +1,9 @@
 // 数据完整性验证脚本 (node validate.js)
 const fs = require('fs');
 const vm = require('vm');
-const base = 'C:/Users/darkflorence/BankCampusRadar/';
+const path = require('path');
+// 兼容本地 Windows 与 CI Linux：基于脚本自身位置解析数据文件
+const base = path.resolve(__dirname) + '/';
 function load(f) {
   const ctx = { window: {} };
   vm.createContext(ctx);
