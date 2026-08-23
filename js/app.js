@@ -328,6 +328,11 @@
     var cls = bank.rank <= 10 ? "rank-badge top" : "rank-badge";
     return '<div class="rank-badge ' + cls + '">' + bank.rank + "<small>百强</small></div>";
   }
+  function locLineHtml(p) {
+    var all = p.locs.join(" / ");
+    var show = p.locs.length > 3 ? p.locs.slice(0, 3).join(" / ") + " 等" + p.locs.length + "城" : all;
+    return '<span class="loc-line" title="' + esc(all) + '">' + I.pin + "<b>" + esc(show) + "</b></span>";
+  }
   function posRow(p, opts) {
     opts = opts || {};
     var bank = bankById(p.bank);
@@ -347,12 +352,12 @@
         "</div>" +
       "</div>" +
       '<div class="type-cell">' +
-        '<div class="pos-type">' + esc(p.type) + "</div>" +
+        '<div class="pos-type" title="' + esc(p.type) + '">' + esc(p.type) + "</div>" +
         '<div class="pos-batch">' + p.target + "届 · " + esc(p.batch) + "</div>" +
       "</div>" +
       '<div class="info-cell">' +
         '<span class="edu-chip">' + I.edu + esc(p.edu) + "</span>" +
-        '<span class="loc-line" title="' + esc(p.locs.join(" / ")) + '">' + I.pin + "<b>" + esc(p.locs.join(" / ")) + "</b></span>" +
+        locLineHtml(p) +
       "</div>" +
       '<div class="dead-cell">' +
         '<div class="dead-date">' + esc(p.dead) + "</div>" +
